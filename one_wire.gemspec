@@ -1,20 +1,25 @@
-Gem::Specification.new do |s|
-  s.name = "one_wire"
-  s.version = '0.0.1'
+Gem::Specification.new do |spec|
+  spec.name = "one_wire"
+  spec.version = '0.0.1'
 
-  s.authors = ["as:app worker"]
-  s.description = %q{Maxim's Integrated One wire binding}
-  s.summary = %q{asapp_gem}
+  spec.authors = ["as:app worker"]
+  spec.summary = %q{asapp_gem}
+  spec.description = %q{Maxim's 1-wire binding}
+  spec.email = %q{opensource@asapp.fr}
+  spec.license = "MIT"
+  spec.homepage = %q{https://github.com/asapp}
 
-  s.email = %q{opensource@asapp.fr}
-  s.license = "MIT"
-  s.extra_rdoc_files = Dir['*.md']
-  s.files = `git ls-files`.split($\)
-  s.homepage = %q{https://github.com/asapp}
-  s.rdoc_options = ["--charset=UTF-8"]
-  s.require_paths = ["lib"]
+  spec.files = `git ls-files`.split($\)
+  spec.require_paths = ["lib"]
+  # spec.bindir = 'bin'
+  # spec.executables << '...'
 
-  s.add_development_dependency  'rake'
-  s.add_development_dependency  'rspec'
-  s.add_development_dependency  'rdoc'
+  spec.extra_rdoc_files = Dir['*.md']
+  spec.rdoc_options = ["--charset=UTF-8"]
+  
+  spec.add_development_dependency  'rake'
+  spec.add_development_dependency  'rspec'
+  spec.add_development_dependency  'rdoc'
+  
+  # spec.add_runtime_dependency      '...'
 end

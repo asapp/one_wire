@@ -30,6 +30,7 @@ module OneWire
       case File.basename(path)[/([\da-f]{2})-[\da-f]{12}/, 1]
         when *Thermometer::PREFIX then return Thermometer.new(path)
       #   when *%w{06 08 0A 0C} then Memory.new(path)
+        when %{00} then return nil
         else raise "1 wire device family not implemented for `#{path}`"
       end
     end

@@ -3,7 +3,7 @@ module OneWire
     attr_reader :path
     attr_accessor :force
 
-    def initialize path
+    def initialize path = nil
       @path = path
       w1_slave(true)
       name(true)
