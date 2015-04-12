@@ -1,18 +1,16 @@
 Gem::Specification.new do |spec|
-  spec.name = "one_wire"
-  spec.version = '0.0.1'
+  spec.name = "One Wire"
+  spec.version = '0.1.0'
 
   spec.authors = ["as:app worker"]
   spec.summary = %q{asapp_gem}
-  spec.description = %q{Maxim's 1-wire binding}
+  spec.description = %q{Maxim's 1-wire binding to w1-gpio driver}
   spec.email = %q{opensource@asapp.fr}
   spec.license = "MIT"
-  spec.homepage = %q{https://github.com/asapp}
+  spec.homepage = %q{https://github.com/asapp/one_wire}
 
   spec.files = `git ls-files`.split($\)
   spec.require_paths = ["lib"]
-  # spec.bindir = 'bin'
-  # spec.executables << '...'
 
   spec.extra_rdoc_files = Dir['*.md']
   spec.rdoc_options = ["--charset=UTF-8"]
@@ -20,6 +18,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency  'rake'
   spec.add_development_dependency  'rspec'
   spec.add_development_dependency  'rdoc'
-  
-  # spec.add_runtime_dependency      '...'
 end
