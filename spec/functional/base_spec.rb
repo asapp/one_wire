@@ -7,15 +7,16 @@ describe OneWire do
   end
 
   it { expect(subject.slaves).to all( match /fixtures\/sys_bus_w1_devices\/.{2}-.{12}/ ) }
+
   xit { expect(subject.find "00-").to all( match "00-" ) }
   xit { expect(subject.find "00-").to all( match /00-/ ) }
   it { expect(subject.find /00-/).to all( match "00-" ) }
   it { expect(subject.find /00-/).to all( match /00-/ ) }
   it { expect(subject.find(/00-/).first).to match /fixtures\/sys_bus_w1_devices\/0{2}-0{12}/ }
 
-
-
-  xit { expect(subject.load(subject.slaves.first)).to be_kind_of OneWire::Thermometer}
+  it { expect(subject.load(subject.find(/00-/).first)).to be_nil}
+  it { expect(subject.load(subject.find(/28-/).first)).to be_kind_of OneWire::Thermometer}
+  it { expect { subject.load(subject.find(/08-/).first) }.to raise_error}
 
   describe OneWire::Base do
     it { is_expected.to be_kind_of OneWire::Base }
@@ -31,7 +32,7 @@ describe OneWire do
   end
 
   describe OneWire::Thermometer do    
-    subject {OneWire::Thermometer.new(OneWire.find(/03/).first)}
+    subject {OneWire::Thermometer.new(OneWire.find(/-000000000003/).first)}
 
     it { is_expected.to be_kind_of OneWire::Thermometer }
     it { expect(subject.name).to eq "28-000000000003" }

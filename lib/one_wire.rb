@@ -3,28 +3,6 @@ require 'one_wire/thermometer'
 
 module OneWire
   class << self
-  # w1_bq27000 w1_ds2413 w1_ds2431 w1_ds2760 w1_ds2781 w1-gpio w1_therm    
-  # w1_ds2408 w1_ds2423 w1_ds2433 w1_ds2780 w1_ds28e04 w1_smem 
-  
-    # TODO test this for debian/ubuntu
-    # def modprobe *args
-    #   `modprobe -a #{args.unshift('w1-gpio').compact.join(' ')}`
-    # end
-
-    # TODO implement this
-    # def install
-    #   raise NotImplementedError
-    #   # Debian/raspian
-    #   '/etc/modules.conf'
-    #   '/etc/modprobe.d/modeprobe.conf'
-    #   '/etc/modprobe.d/'
-    #   'dtoverlay=w1-gpio,gpiopin=4' > '/boot/config.txt'
-
-    #   # Ubuntu
-    #   '/etc/modules'
-    #   '/etc/modules-load.d/'
-    # end
-
     def slaves &block
       Dir.glob(File.join(File::SEPARATOR, 'sys', 'bus', 'w1', 'devices', '*-*'), &block)
     end
@@ -33,7 +11,16 @@ module OneWire
       slaves.keep_if { |v| v =~ query }
     end
 
-# Maxim's devices groups
+    # def find_by_type
+    # end
+
+    # def find_by_id
+    # end
+
+    # def find_by_name
+    # end
+
+# Maxim's Integrated devices types :
 # Identification only
 # Identification plus control
 # Identification plus temperature
