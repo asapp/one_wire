@@ -1,25 +1,21 @@
 module OneWire
   class Base
     attr_reader :path
-    attr_accessor :force
 
     def initialize path = nil
       @path = path
-      w1_slave(true)
-      name(true)
-      self
     end
 
-    def name force = false
-      return @name unless force || @force
-      @name = File.read(File.join(@path, 'name')).chomp
+    def name
+      read_attr 'name'
     end
 
-    alias_method :id, :name
+    def id
+      read_attr 'id'
+    end
 
-    def w1_slave force = false
-      return @w1_slave unless force || @force
-      @w1_slave = File.read(File.join(path, 'w1_slave')).chomp
+    def w1_slave
+      read_attr 'w1_slave'
     end
 
     alias_method :to_s, :w1_slave
@@ -31,9 +27,11 @@ module OneWire
     def last_value *args
       raise NotImplementedError
     end
+    
+    private
 
-    def watch tight, &block
-      OneWire.watch self, tight, &block
+    def read_attr value
+      File.read(File.join(@path.to_s, value)).chomp('')
     end
   end
 end
