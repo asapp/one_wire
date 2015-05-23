@@ -27,6 +27,10 @@ module OneWire
     def last_value *args
       raise NotImplementedError
     end
+
+    def dump
+      [self.class, @path]
+    end
     
     private
 
