@@ -1,5 +1,5 @@
 Gem::Specification.new do |spec|
-  spec.name = "one_wire"
+  spec.name = "sysfs_one_wire"
   spec.version = '0.1.0'
 
   spec.authors = ["as:app worker"]

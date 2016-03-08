@@ -1,5 +1,5 @@
 # One Wire
-This is a uby gem offering binding to w1-gpio kernel module.
+This is a ruby gem offering binding to w1-gpio kernel module.
 
 GPIO w1 bus master driver by Ville Syrjala <syrjala@sci.fi>
 
@@ -12,6 +12,12 @@ modprobe w1-gpio
 depending on the device you want to control load one of these.
 ```
 modprobe -a w1_bq27000 w1_ds2413 w1_ds2431 w1_ds2760 w1_ds2781 w1_therm w1_ds2408 w1_ds2423 w1_ds2433 w1_ds2780 w1_ds28e04 w1_smem 
+```
+and of course
+```ruby
+gem 'sysfs_one_wire'
+#or 
+gem install sysfs_one_wire
 ```
 
 for loading after reboot and depending on your OS you could try following commands
