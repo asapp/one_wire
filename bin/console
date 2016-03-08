@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+
+require 'one_wire'
+
+require 'irb'
+require 'irb/completion'
+IRB.start
