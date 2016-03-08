@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
 
   spec.authors = ["as:app worker"]
   spec.summary = %q{asapp_gem}
-  spec.description = %q{Maxim's 1-wire binding to w1-gpio driver}
+  spec.description = %q{Maxim's 1-wire binding backed on w1-gpio driver}
   spec.email = %q{opensource@asapp.fr}
   spec.license = "MIT"
   spec.homepage = %q{https://github.com/asapp/one_wire}
