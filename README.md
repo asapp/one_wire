@@ -3,6 +3,8 @@ This is a ruby gem offering binding to w1-gpio kernel module.
 
 GPIO w1 bus master driver by Ville Syrjala <syrjala@sci.fi>
 
+https://www.kernel.org/doc/Documentation/w1/w1.generic
+
 ## Installation
 `w1-gpio` module should be loaded, 
 ```
@@ -44,9 +46,31 @@ cat 'dtoverlay=w1-gpio' > /boot/config.txt
 	OneWire.devices # return all the devices objects
 ```
 
-### Extend
+Ok, with `OneWire.devices` we can see our sensor is well recognized.
+Now, can get the corresponding OneWire::Thermometer object, with :
+
 ```ruby
-class Mermory < OneWire::Base
+soil_sensor = OneWire.devices.first # if it is the first on the list
+# or 
+soil_sensor = OneWire.load('/sys/bus/w1/devices/28-031581efxxxx') # because we already had the path to it
+```
+then you have access  to some methods such as :
+```ruby
+soil_sensor.value               # current temperature in °C
+soil_sensor.last_value          # last checked temperature, return nil if you didn't called value before
+soil_sensor.id                  # 1wire device uniqe id
+soil_sensor.name                # device uniqe name
+soil_sensor.w1_slave            # return the w1_slave file, as in 'cat'
+soil_sensor.dump                # return an array which can be stored in database for later loading
+```
+
+### Extend
+I currently have only a DS18B20 to build and test this gem, but you can also extend it for memory, switch, or others devices supported by the kernel driver.
+
+It is pretty easy to create other object by subclassing OneWire::Base.
+
+```ruby
+class Memory < OneWire::Base
 
   PREFIX = %w{06 08 0A 0C}
   attr_reader :last_value
