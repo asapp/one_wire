@@ -7,17 +7,15 @@ describe OneWire do
   end
 
   it { expect(subject.slaves).to all( match /fixtures\/sys_bus_w1_devices\/.{2}-.{12}/ ) }
-
   it { expect(subject.find "00-").to all( match "00-" ) }
   it { expect(subject.find "00-").to all( match /00-/ ) }
   it { expect(subject.find /00-/).to all( match "00-" ) }
   it { expect(subject.find /00-/).to all( match /00-/ ) }
   it { expect(subject.find(/00-/).first).to match /fixtures\/sys_bus_w1_devices\/0{2}-0{12}/ }
-
   it { expect(subject.load(subject.find(/00-/).first)).to be_nil}
   it { expect(subject.load(subject.find(/28-/).first)).to be_kind_of OneWire::Thermometer}
-
   it { expect(subject.all).to all(be_kind_of(OneWire::Base))}
+  it { expect{|b| subject.all(&b) }.to yield_control.exactly(5).times }
 
   describe OneWire::Base do
     it { is_expected.to be_kind_of OneWire::Base }
@@ -30,43 +28,5 @@ describe OneWire do
 
     it { expect { empty_device.value }.to raise_error(NotImplementedError) }
     it { expect { empty_device.last_value }.to raise_error(NotImplementedError) }
-  end
-
-  describe OneWire::Thermometer do
-    subject {OneWire::Thermometer.new(OneWire.find(/-000000000003/).first)}
-
-    it { is_expected.to be_kind_of OneWire::Thermometer }
-    it { expect(subject.name).to eq "28-000000000003" }
-    xit { expect(subject.id).to eq "" } # don't know how to read `id` file
-    it { expect(subject.w1_slave).to eq "9f 01 4b 46 7f ff 01 10 40 : crc=40 YES\n9f 01 4b 46 7f ff 01 10 40 t=25937" }
-
-    it { expect(subject.value).to eq 25.937 }
-
-    it "should update the last value" do
-      expect(subject.last_value).to be_nil
-      subject.value
-      expect(subject.last_value).to be_nil
-      subject.value
-      expect(subject.last_value).to eq 25.937
-    end
-  end
-
-  describe OneWire::Thermometer do
-    subject {OneWire::Thermometer.new(OneWire.find(/28-000000000004/).first)}
-
-    it { is_expected.to be_kind_of OneWire::Thermometer }
-    it { expect(subject.name).to eq "28-000000000004" }
-    xit { expect(subject.id).to eq "" } # don't know how to read `id` file
-    it { expect(subject.w1_slave).to eq "9f 01 4b 46 7f ff 01 10 40 : crc=40 YES\n9f 01 4b 46 7f ff 01 10 40 t=-25937" }
-
-    it { expect(subject.value).to eq -25.937 }
-
-    it "should update the last value" do
-      expect(subject.last_value).to be_nil
-      subject.value
-      expect(subject.last_value).to be_nil
-      subject.value
-      expect(subject.last_value).to eq -25.937
-    end
   end
 end

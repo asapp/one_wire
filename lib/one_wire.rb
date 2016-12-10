@@ -11,33 +11,17 @@ module OneWire
       query = Regexp.new query if query.is_a? String
       slaves.keep_if { |v| v =~ query }
     end
-
-    # def find query, &block
-    #   devices = slaves.keep_if { |v| v =~ query }
-    #   devices = devices.collect { |path| load(path) }
-    #   devices.each &block if block_given?
-    #   devices      
-    # end
-
+    
     def all &block
       devices = slaves.collect { |path| load(path) rescue nil }.compact
       devices.each &block if block_given?
       devices
     end
 
-    # def find_by_type
-    # end
-
-    # def find_by_id
-    # end
-
-    # def find_by_name
-    # end
-
     def load path
       case File.basename(path)[/([\da-f]{2})-[\da-f]{12}/, 1]
         when *Thermometer::PREFIX then return Thermometer.new(path)
-      #   when *%w{06 08 0A 0C} then Memory.new(path)
+      #   when *%w{06 08 0A 0C} then return Memory.new(path)
         when %{00} then return nil
         else Base.new(path)
       end

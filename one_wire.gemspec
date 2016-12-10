@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "sysfs_one_wire"
-  spec.version = '0.1.0'
+  spec.version = '0.1.1'
 
   spec.authors = ["as:app worker"]
   spec.summary = %q{asapp_gem}
@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
 
   spec.extra_rdoc_files = Dir['*.md']
   spec.rdoc_options = ["--charset=UTF-8"]
-  
+
   spec.add_development_dependency  'rake'
   spec.add_development_dependency  'rspec'
   spec.add_development_dependency  'rdoc'
