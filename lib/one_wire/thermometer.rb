@@ -7,7 +7,9 @@ module OneWire
 
     def value
       @last_value = @value
-      @value = w1_slave[/t=(-?\d*)/, 1].to_f / 1000
+      status_line, temperature_line = w1_slave.split("\n")
+      raise SensorNotReady unless status_line.end_with?('YES')
+      @value = temperature_line[/t=(-?\d*)/, 1].to_f / 1000
     end
   end
 end
