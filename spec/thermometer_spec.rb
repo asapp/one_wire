@@ -38,4 +38,12 @@ describe OneWire::Thermometer do
       expect(subject.last_value).to eq -25.937
     end
   end
+
+  context "when thermometer is not ready" do
+    subject {OneWire::Thermometer.new(OneWire.find(/28-000000000005/).first)};
+    it { is_expected.to be_kind_of OneWire::Thermometer }
+    it { expect(subject.name).to eq "28-000000000005" }
+    it { expect(subject.w1_slave).to eq "ff ff ff ff ff ff ff ff ff : crc=40 NO\n9f 01 4b 46 7f ff 01 10 40 t=-62" }
+    it { expect { subject.value }.to raise_error OneWire::SensorNotReady }
+  end
 end

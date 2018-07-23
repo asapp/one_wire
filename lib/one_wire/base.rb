@@ -38,4 +38,7 @@ module OneWire
       File.read(File.join(@path.to_s, value)).chomp('')
     end
   end
+
+  class SensorNotReady < StandardError
+  end
 end
