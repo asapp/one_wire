@@ -15,7 +15,7 @@ describe OneWire do
   it { expect(subject.load(subject.find(/00-/).first)).to be_nil}
   it { expect(subject.load(subject.find(/28-/).first)).to be_kind_of OneWire::Thermometer}
   it { expect(subject.all).to all(be_kind_of(OneWire::Base))}
-  it { expect{|b| subject.all(&b) }.to yield_control.exactly(5).times }
+  it { expect{|b| subject.all(&b) }.to yield_control.exactly(subject.all.count).times }
 
   describe OneWire::Base do
     it { is_expected.to be_kind_of OneWire::Base }
